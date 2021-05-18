@@ -4,14 +4,12 @@ public class Product {
     private int id;
     private String thumbnail;
     private String name;
-    private String category;
     private long unitPrice;
 
-    public Product(int id, String thumbnail, String name, String category, long unitPrice) {
+    public Product(int id, String thumbnail, String name, long unitPrice) {
         this.id = id;
         this.thumbnail = thumbnail;
         this.name = name;
-        this.category = category;
         this.unitPrice = unitPrice;
     }
 
@@ -39,14 +37,6 @@ public class Product {
         this.name = name;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public long getUnitPrice() {
         return unitPrice;
     }
@@ -61,7 +51,6 @@ public class Product {
                 "id=" + id +
                 ", thumbnail='" + thumbnail + '\'' +
                 ", name='" + name + '\'' +
-                ", category='" + category + '\'' +
                 ", unitPrice=" + unitPrice +
                 '}';
     }

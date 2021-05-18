@@ -1,6 +1,9 @@
 package hanu.a2_1801040067.MyCart.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +14,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -45,6 +51,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
         public void bind(Product item){
             itemName.setText(item.getName());
             ImageLoad helper = new ImageLoad(item.getThumbnail(), itemThumbnail);
+            helper.execute();
             DecimalFormat dFormat = new DecimalFormat();
             String formattedString = dFormat.format(item.getUnitPrice());
             System.out.println(formattedString);
