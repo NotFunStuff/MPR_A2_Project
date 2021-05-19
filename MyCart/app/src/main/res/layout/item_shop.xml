@@ -52,7 +52,7 @@
                 android:layout_height="30dp"
                 android:layout_weight="1"
                 android:background="@drawable/white_rec_background"
-                android:padding="1"
+                android:padding="1dp"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/cart" />
         </LinearLayout>
