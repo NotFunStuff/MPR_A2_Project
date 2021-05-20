@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
 
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,29 +20,32 @@
         <ImageView
             android:id="@+id/cart_thumbnail"
             android:layout_width="100dp"
-            android:layout_height="match_parent"
+            android:layout_height="100dp"
             android:layout_weight="1"
             tools:srcCompat="@tools:sample/avatars" />
 
         <LinearLayout
-            android:layout_width="200dp"
+            android:layout_width="125dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/cart_name"
-                android:layout_width="match_parent"
+                android:layout_width="125dp"
                 android:layout_height="50dp"
                 android:gravity="center_vertical"
+                android:maxLines="2"
+                android:ellipsize="end"
                 android:text="TextView" />
 
             <TextView
                 android:id="@+id/cart_pre_price"
-                android:layout_width="match_parent"
+                android:layout_width="125dp"
                 android:layout_height="50dp"
                 android:gravity="center_vertical"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="#FF5722" />
         </LinearLayout>
 
         <LinearLayout
@@ -54,7 +56,7 @@
 
             <ImageView
                 android:id="@+id/cart_plus"
-                android:layout_width="match_parent"
+                android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_margin="1dp"
                 android:background="@drawable/white_rec_background"
@@ -62,15 +64,15 @@
 
             <TextView
                 android:id="@+id/cart_quantity"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_width="25dp"
+                android:layout_height="40dp"
                 android:layout_margin="1dp"
                 android:gravity="center_vertical|right"
                 android:text="TextView" />
 
             <ImageView
                 android:id="@+id/cart_minus"
-                android:layout_width="match_parent"
+                android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_margin="1dp"
                 android:background="@drawable/white_rec_background"
@@ -80,10 +82,13 @@
 
         <TextView
             android:id="@+id/cart_sum_price"
-            android:layout_width="wrap_content"
+            android:layout_width="75dp"
             android:layout_height="match_parent"
+            android:layout_marginEnd="1dp"
+            android:layout_marginRight="1dp"
             android:layout_weight="1"
             android:gravity="center_vertical|right"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#FF5722" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

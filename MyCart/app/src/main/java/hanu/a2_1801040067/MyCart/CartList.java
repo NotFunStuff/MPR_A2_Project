@@ -26,6 +26,8 @@ public class CartList extends AppCompatActivity {
         productList = new ArrayList<>();
         productList.add(new Product(1, "https://cf.shopee.vn/file/beca50e46d2088fc5ad3c74aff5cc112", "[Siêu HOT] Đèn Ngủ Chiếu Sao Tự Xoay 3D",169000,1));
         productList.add(new Product(2, "https://cf.shopee.vn/file/b0c4d1c4443fb7c2d9b97cd8681f444e", "Đèn Ngủ 3D Led Nhiều Mẫu Hình Cực Đẹp - 3 màu (Được chọn hình)",55000,1));
+        productList.add(new Product(2, "https://cf.shopee.vn/file/b0c4d1c4443fb7c2d9b97cd8681f444e", "Đèn Ngủ 3D Led Nhiều Mẫu Hình Cực Đẹp - 3 màu (Được chọn hình)",55000,1));
+        productList.add(new Product(2, "https://cf.shopee.vn/file/b0c4d1c4443fb7c2d9b97cd8681f444e", "Đèn Ngủ 3D Led Nhiều Mẫu Hình Cực Đẹp - 3 màu (Được chọn hình)",55000,1));
         CartAdapter cartAdapter = new CartAdapter(productList);
         cartRV.setAdapter(cartAdapter);
         cartRV.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

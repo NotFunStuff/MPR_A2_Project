@@ -54,10 +54,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
             helper.execute();
             DecimalFormat dFormat = new DecimalFormat();
             String formattedString = dFormat.format(item.getUnitPrice());
-            cartPrePrice.setText(formattedString + "VND");
+            cartPrePrice.setText(formattedString + "đ");
             cartQuantity.setText(String.valueOf(item.getQuantity()));
             String sumFormat = dFormat.format(item.getUnitPrice()*item.getQuantity());
-            cartSum.setText(sumFormat + "VND");
+            cartSum.setText(sumFormat + "đ");
             cartName.setText(item.getName());
             cartPlus.setOnClickListener(new View.OnClickListener() {
                 @Override

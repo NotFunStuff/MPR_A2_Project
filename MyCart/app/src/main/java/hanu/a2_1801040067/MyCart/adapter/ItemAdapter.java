@@ -62,7 +62,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
             helper.execute();
             DecimalFormat dFormat = new DecimalFormat();
             String formattedString = dFormat.format(item.getUnitPrice());
-            itemPrice.setText(formattedString + "VND");
+            itemPrice.setText(formattedString + "đ");
 
             itemAddBtn.setOnClickListener(new View.OnClickListener(){
                 @Override
