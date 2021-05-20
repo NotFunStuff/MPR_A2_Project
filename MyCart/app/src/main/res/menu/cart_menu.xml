@@ -4,6 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
     <item
+        android:id="@+id/menu_cart"
         android:icon="@drawable/cart_nor"
         android:title="View Cart" />
 </menu>

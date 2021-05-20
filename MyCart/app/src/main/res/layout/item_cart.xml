@@ -56,13 +56,15 @@
                 android:id="@+id/cart_plus"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
+                android:layout_margin="1dp"
                 android:background="@drawable/white_rec_background"
                 app:srcCompat="@drawable/plus" />
 
             <TextView
                 android:id="@+id/cart_quantity"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="45dp"
+                android:layout_margin="1dp"
                 android:gravity="center_vertical|right"
                 android:text="TextView" />
 
@@ -70,6 +72,7 @@
                 android:id="@+id/cart_minus"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
+                android:layout_margin="1dp"
                 android:background="@drawable/white_rec_background"
                 app:srcCompat="@drawable/minus" />
 
