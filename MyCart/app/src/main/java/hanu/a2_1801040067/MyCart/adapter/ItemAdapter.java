@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,8 +22,11 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import hanu.a2_1801040067.MyCart.R;
+import hanu.a2_1801040067.MyCart.db.ProductManager;
 import hanu.a2_1801040067.MyCart.helper.ImageLoad;
 import hanu.a2_1801040067.MyCart.models.Product;
+
+import static android.app.Activity.RESULT_OK;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
 
@@ -38,6 +42,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
         private TextView itemPrice;
         private ImageButton itemAddBtn;
         private Context context;
+        private List<Product> products;
+        private ProductManager productManager;
 
         public ItemHolder(@NonNull View itemView, Context context) {
             super(itemView);
@@ -46,6 +52,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
             itemThumbnail = itemView.findViewById(R.id.item_thumbnail);
             itemPrice = itemView.findViewById(R.id.item_price);
             itemAddBtn = itemView.findViewById(R.id.item_add_button);
+            productManager = productManager.getInstance(context);
+            products = productManager.all();
         }
 
         public void bind(Product item){
@@ -60,7 +68,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
             itemAddBtn.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-
+                    for ( int i =0; i < products.size();  i++){
+                        Product p = products.get(i);
+                        if (item.getId() == p.getId()){
+                            break;
+                        }
+                    }
+                    productManager.add(item);
+                    Toast.makeText(context, "Succesfull Added to Cart", Toast.LENGTH_SHORT).show();
                 }
             });
         }

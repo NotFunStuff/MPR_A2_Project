@@ -1,10 +1,12 @@
 package hanu.a2_1801040067.MyCart;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -22,11 +24,16 @@ import java.util.List;
 import java.util.Scanner;
 
 import hanu.a2_1801040067.MyCart.adapter.ItemAdapter;
+import hanu.a2_1801040067.MyCart.db.ProductManager;
 import hanu.a2_1801040067.MyCart.models.Product;
 
 public class MainActivity extends AppCompatActivity {
+    public static final int PRODUCT_ADDED = 1;
     private RecyclerView itemList;
     private List<Product> productList;
+    private ProductManager productManager;
+    private List<Product> db;
+
     class RestLoad extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... strings) {
@@ -56,18 +63,13 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-
             super.onPostExecute(result);
-//            if (result == null) {
-//                Toast.makeText(getActivity(), "ERROR", Toast.LENGTH_LONG).show();
-//                return;
-//            }
             try {
                 productList = new ArrayList<>();
                 JSONArray root = new JSONArray(result);
                 for (int i = 0; i < root.length(); i++) {
                     JSONObject json = root.getJSONObject(i);
-                    Product product = new Product(json.getInt("id"), json.getString("thumbnail"), json.getString("name"), json.getLong("unitPrice"));
+                    Product product = new Product(json.getLong("id"), json.getString("thumbnail"), json.getString("name"), json.getLong("unitPrice"), 1);
                     productList.add(product);
                 }
                 itemList = findViewById(R.id.item_list);
@@ -89,7 +91,20 @@ public class MainActivity extends AppCompatActivity {
         RestLoad restLoad = new RestLoad();
         restLoad.execute("https://mpr-cart-api.herokuapp.com/products");
 
+
     }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (resultCode == RESULT_OK && requestCode == PRODUCT_ADDED) {
+//            db.clear();
+//            db.addAll(productManager.all());
+//
+//            itemAdapter.notifyDataSetChanged();
+//        }
+//    }
 
 
 }

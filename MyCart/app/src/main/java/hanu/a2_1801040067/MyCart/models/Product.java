@@ -1,23 +1,25 @@
 package hanu.a2_1801040067.MyCart.models;
 
 public class Product {
-    private int id;
+    private long id;
     private String thumbnail;
     private String name;
     private long unitPrice;
+    private long quantity;
 
-    public Product(int id, String thumbnail, String name, long unitPrice) {
+    public Product(long id, String thumbnail, String name, long unitPrice, long quantity) {
         this.id = id;
         this.thumbnail = thumbnail;
         this.name = name;
         this.unitPrice = unitPrice;
+        this.quantity = quantity;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -43,6 +45,14 @@ public class Product {
 
     public void setUnitPrice(long unitPrice) {
         this.unitPrice = unitPrice;
+    }
+
+    public long getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(long quantity) {
+        this.quantity = quantity;
     }
 
     @Override
