@@ -32,7 +32,7 @@
             android:textSize="16sp" />
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/searchBtn"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/search_icon_background"

@@ -10,18 +10,25 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 import java.util.List;
 
 import hanu.a2_1801040067.MyCart.R;
+import hanu.a2_1801040067.MyCart.db.ProductManager;
 import hanu.a2_1801040067.MyCart.helper.ImageLoad;
+import hanu.a2_1801040067.MyCart.helper.OnItemsClickListener;
 import hanu.a2_1801040067.MyCart.models.Product;
+
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
     private List<Product> productList;
+    private OnItemsClickListener listener  = null;
+
+    public void setOnItemClickListener(OnItemsClickListener listener){
+        this.listener = listener;
+    }
 
     public CartAdapter(List<Product> productList) {
         this.productList = productList;
@@ -36,6 +43,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
         private ImageView cartPlus;
         private ImageView cartMinus;
         private TextView cartSum;
+        private ProductManager productManager;
+
 
         public CartHolder(@NonNull View itemView, Context context) {
             super(itemView);
@@ -47,6 +56,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
             cartPlus = itemView.findViewById(R.id.cart_plus);
             cartMinus = itemView.findViewById(R.id.cart_minus);
             cartSum = itemView.findViewById(R.id.cart_sum_price);
+            productManager = productManager.getInstance(context);
+        }
+        private String getTotalPrice(){
+            long total = 0;
+            for (int i = 0; i< productList.size(); i++){
+                total += productList.get(i).getQuantity() * productList.get(i).getUnitPrice();
+            }
+            DecimalFormat dFormat = new DecimalFormat();
+            String formattedString = dFormat.format(total);
+            return formattedString;
         }
 
         public void bind(Product item){
@@ -62,14 +81,22 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
             cartPlus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    productManager.addProductQuantity(item, item.getQuantity());
+                    productList.clear();
+                    productList.addAll(productManager.all());
+                    listener.onItemClick(getTotalPrice());
+                    notifyDataSetChanged();
                 }
             });
 
             cartMinus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    productManager.removeProductQuantity(item, item.getQuantity());
+                    productList.clear();
+                    productList.addAll(productManager.all());
+                    listener.onItemClick(getTotalPrice());
+                    notifyDataSetChanged();
                 }
             });
         }
@@ -94,6 +121,5 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
     public int getItemCount() {
         return productList.size();
     }
-
 
 }

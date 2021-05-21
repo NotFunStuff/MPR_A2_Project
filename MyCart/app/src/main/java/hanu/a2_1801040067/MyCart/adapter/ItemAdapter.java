@@ -67,13 +67,21 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
             itemAddBtn.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    for ( int i =0; i < products.size();  i++){
+                    boolean isIn = false;
+                    for ( int i = 0; i < products.size();  i++){
                         Product p = products.get(i);
                         if (item.getId() == p.getId()){
+                            productManager.addProductQuantity(p, p.getQuantity());
+                            isIn = true;
                             break;
                         }
                     }
-                    productManager.add(item);
+                    if (!isIn){
+                        productManager.add(item);
+
+                    }
+                    products.clear();
+                    products.addAll(productManager.all());
                     Toast.makeText(context, "Succesfull Added to Cart", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -99,5 +107,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
     public int getItemCount() {
         return productList.size();
     }
+
 }
 

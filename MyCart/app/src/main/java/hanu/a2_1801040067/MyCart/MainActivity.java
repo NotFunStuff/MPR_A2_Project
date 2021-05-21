@@ -13,6 +13,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,8 +39,9 @@ public class MainActivity extends AppCompatActivity {
     public static final int PRODUCT_ADDED = 1;
     private RecyclerView itemList;
     private List<Product> productList;
-    private ProductManager productManager;
-    private List<Product> db;
+    private List<Product> searchList;
+    private ItemAdapter itemAdapter;
+    private EditText searchBox;
 
     class RestLoad extends AsyncTask<String, Void, String> {
         @Override
@@ -78,11 +83,34 @@ public class MainActivity extends AppCompatActivity {
                 }
                 itemList = findViewById(R.id.item_list);
 
-                ItemAdapter ItemAdapter = new ItemAdapter(productList);
-                itemList.setAdapter(ItemAdapter);
+                itemAdapter = new ItemAdapter(productList);
+                itemList.setAdapter(itemAdapter);
                 itemList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
                 itemList.setLayoutManager(gridLayoutManager);
+
+                ImageButton searchBtn = findViewById(R.id.searchBtn);
+                searchBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        searchList.clear();
+                        String searchKey = searchBox.getText().toString();
+                        for (int i = 0; i< productList.size(); i++){
+                            if (productList.get(i).getName().contains(searchKey)){
+                                searchList.add(productList.get(i));
+                            }
+                        }
+                        if (searchList.size() == 0){
+                            Toast.makeText(getApplication(), "Not Found", Toast.LENGTH_SHORT).show();
+                        } else {
+                            itemAdapter = new ItemAdapter(searchList);
+                            itemList.setAdapter(itemAdapter);
+                            itemList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                            GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+                            itemList.setLayoutManager(gridLayoutManager);
+                        }
+                    }
+                });
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -92,6 +120,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        searchBox = findViewById(R.id.searchBox);
+        searchList = new ArrayList<>();
         RestLoad restLoad = new RestLoad();
         restLoad.execute("https://mpr-cart-api.herokuapp.com/products");
 
@@ -115,17 +145,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (resultCode == RESULT_OK && requestCode == PRODUCT_ADDED) {
-//            db.clear();
-//            db.addAll(productManager.all());
-//
-//            itemAdapter.notifyDataSetChanged();
-//        }
-//    }
-
-
 }
